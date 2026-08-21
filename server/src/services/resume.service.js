@@ -1,27 +1,17 @@
-import * as pdfjsLib from 'pdfjs-dist/legacy/build/pdf.mjs';
+import { PDFParse } from 'pdf-parse';
 import Resume from '../models/Resume.model.js';
 
 export const parseResumePDF = async (pdfBuffer) => {
   try {
-    const uint8Array = new Uint8Array(
-      pdfBuffer.buffer,
-      pdfBuffer.byteOffset,
-      pdfBuffer.byteLength
-    );
+    const parser = new PDFParse({ data: pdfBuffer });
 
-    const loadingTask = pdfjsLib.getDocument({ data: uint8Array });
-    const pdf = await loadingTask.promise;
+    const result = await parser.getText();
 
-    let extractedText = '';
+    await parser.destroy();
 
-    for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
-      const page = await pdf.getPage(pageNum);
-      const content = await page.getTextContent();
-      const strings = content.items.map((item) => item.str);
-      extractedText += strings.join(' ');
-    }
+    const extractedText = result.text?.trim();
 
-    if (!extractedText || extractedText.trim().length === 0) {
+    if (!extractedText) {
       throw new Error('No text could be extracted from the PDF');
     }
 
