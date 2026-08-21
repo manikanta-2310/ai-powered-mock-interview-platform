@@ -1,490 +1,414 @@
 # AI-Powered Mock Interview Platform
 
-An AI-powered mock interview platform designed to bridge the gap between **knowing an answer and performing under interview conditions**.
+An AI-powered mock interview platform that helps users practice technical interviews through personalized questions, resume-based interview preparation, voice interviews, live coding, and AI-generated performance feedback.
 
-The platform simulates realistic technical interviews by generating personalized questions from a candidate's resume, conducting voice-based interviews, supporting live coding challenges, and providing detailed AI-generated performance feedback.
+## 🚀 Live Demo
 
-## 🎯 Problem
+Frontend: https://ai-mock-interview-frontend-jade.vercel.app
 
-Preparing for interviews often focuses on reading questions and studying concepts, but interviews require candidates to **think, communicate, and perform in real time**.
+Backend API: https://ai-mock-interview-api.vercel.app
 
-Traditional approaches have limitations:
+## ✨ Features
 
-* Practicing with friends may not provide industry-relevant questions.
-* Watching interview videos does not provide speaking practice.
-* Reading Q&A lists encourages memorization rather than explanation.
-* Paid mock interviews can be expensive and difficult to schedule.
-
-This platform provides an AI interviewer that is available **24/7**, allowing candidates to repeatedly practice realistic interviews and receive immediate feedback.
-
-## 🚀 Key Features
-
-### Resume-Based Interview Questions
-
-* Upload a PDF resume.
-* Extract resume text automatically.
-* Generate personalized interview questions using Google Gemini.
-* Questions are tailored to the selected role and candidate experience.
-
-### 🎙️ Voice-Based Interviews
-
-* AI interviewer named **Natalie**.
-* AI questions can be converted to speech using Murf AI.
-* Candidates can record verbal answers.
-* AssemblyAI converts recorded answers into text.
-* Contextual follow-up questions are generated from the conversation.
-
-### 💻 Live Coding
-
-* Built-in Monaco code editor.
-* Coding questions are included in technical interviews.
-* Submitted code is evaluated using Gemini.
-* Code submissions and evaluations are stored with the interview.
-
-### 📊 AI-Powered Feedback
-
-After completing an interview, Gemini generates a detailed performance report containing scores across five categories, strengths, improvement areas, and a final assessment.
-
-### 📚 Interview History
-
-* View previous interviews.
-* Paginated interview history.
-* View feedback for completed interviews.
-* Resume interviews that are still in progress.
-* Delete individual interviews.
-* Clear interview history.
-
-### 📈 Dashboard
-
-The dashboard provides:
-
-* Total interviews
-* Completed interviews
-* Average score
-* Three most recent interviews
-* Quick access to start a new interview
-
-### 🎯 Multi-Role Support
-
-The platform supports interview preparation for roles such as:
-
-* Frontend Developer
-* Backend Developer
-* Full Stack Developer
-* Data Analyst
-* DevOps
-* And more
-
----
+- 🔐 User registration and login
+- 📄 Resume upload and PDF text extraction
+- 🤖 AI-generated personalized interview questions
+- 🎯 Interview configuration based on role and difficulty
+- 🎤 Voice-based interviews
+- 🗣️ Speech-to-text using AssemblyAI
+- 🔊 Text-to-speech using Murf AI
+- 💻 Live coding interview environment
+- 📊 AI-powered interview scoring
+- 💬 Personalized feedback after interviews
+- 📜 Interview history
+- 📈 Dashboard with interview statistics
+- ☁️ Cloud deployment using Vercel
+- 🗄️ MongoDB-based data persistence
 
 ## 🛠️ Tech Stack
 
 ### Frontend
 
-* React
-* React Router
-* Axios
-* Monaco Editor
+- React.js
+- Vite
+- React Router
+- Axios
+- React Icons
+- Monaco Editor
+- React Hot Toast
+- CSS
 
 ### Backend
 
-* Node.js
-* Express.js
-* MongoDB
-* Mongoose
+- Node.js
+- Express.js
+- MongoDB
+- Mongoose
+- JWT Authentication
+- Multer
+- PDF parsing
+- CORS
 
-### AI & Voice
+### AI & External Services
 
-* Google Gemini
-* AssemblyAI
-* Murf AI
+- Google Gemini API — AI interview question generation and feedback
+- AssemblyAI — Speech-to-text
+- Murf AI — Text-to-speech
 
-### Authentication & Utilities
+### Deployment
 
-* JWT authentication
-* Multer for file uploads
-* PDF.js for resume text extraction
+- Vercel
+- GitHub
 
----
+## 🏗️ Project Structure
 
-## 🏗️ Architecture
+    ai-powered-mock-interview-platform/
+    │
+    ├── client/
+    │   ├── src/
+    │   │   ├── components/
+    │   │   ├── pages/
+    │   │   ├── services/
+    │   │   ├── context/
+    │   │   ├── hooks/
+    │   │   ├── App.jsx
+    │   │   └── main.jsx
+    │   ├── public/
+    │   ├── package.json
+    │   └── vite.config.js
+    │
+    ├── server/
+    │   ├── src/
+    │   │   ├── controllers/
+    │   │   ├── middleware/
+    │   │   ├── models/
+    │   │   ├── routes/
+    │   │   ├── services/
+    │   │   └── app.js
+    │   ├── server.js
+    │   └── package.json
+    │
+    ├── .gitignore
+    └── README.md
 
-```text
-                         AI Mock Interview Platform
-                                  │
-                    ┌─────────────┴─────────────┐
-                    │                           │
-             React Frontend              Node.js Backend
-                    │                           │
-          ┌─────────┴─────────┐        ┌───────┴────────┐
-          │                   │        │                │
-      Setup Page         Interview     Controllers     Services
-          │                   │        │                │
-      Feedback            Voice/Code   Routes       Business Logic
-      History                 │        │                │
-          │                   │        └────────┬───────┘
-          └───────────┬───────┘                 │
-                      │                         │
-                 Axios API                     │
-                                                │
-                 ┌──────────────────────────────┼─────────────────┐
-                 │                              │                 │
-             MongoDB                         Gemini          Voice APIs
-                                                     ┌────────────┴────────────┐
-                                                     │                         │
-                                                AssemblyAI                  Murf AI
-                                               Speech → Text              Text → Speech
-```
+## 🧩 System Architecture
+
+    ┌──────────────────────────────┐
+    │          React Client        │
+    │                              │
+    │  Dashboard                   │
+    │  Interview Setup             │
+    │  Voice Interview             │
+    │  Live Coding                 │
+    │  Resume Analysis             │
+    │  AI Scoring                 │
+    │  Interview History           │
+    └──────────────┬───────────────┘
+                   │
+                   │ Axios API Requests
+                   ▼
+    ┌──────────────────────────────┐
+    │       Express.js Server      │
+    │                              │
+    │  Authentication             │
+    │  Interview Routes            │
+    │  Resume Routes               │
+    │  History Routes              │
+    │  Business Logic              │
+    │  Error Handling              │
+    └───────┬──────────┬───────────┘
+            │          │
+            │          │
+            ▼          ▼
+       ┌─────────┐  ┌──────────────┐
+       │ MongoDB │  │ Gemini API   │
+       │         │  │              │
+       │ Users   │  │ Questions    │
+       │ Resume  │  │ Feedback     │
+       │ History │  │ Scoring      │
+       └─────────┘  └──────────────┘
+                         │
+             ┌───────────┴───────────┐
+             │                       │
+             ▼                       ▼
+       ┌─────────────┐        ┌─────────────┐
+       │ AssemblyAI  │        │   Murf AI   │
+       │             │        │             │
+       │ Speech →    │        │ Text →      │
+       │ Text        │        │ Speech      │
+       └─────────────┘        └─────────────┘
 
 ## 🔄 Interview Flow
 
-```text
-Resume Upload
-      ↓
-PDF Text Extraction
-      ↓
-Interview Setup
-(Role + Difficulty)
-      ↓
-Gemini Generates Personalized Questions
-      ↓
-AI Interviewer
-      ↓
-Voice / Text Answer
-      ↓
-AssemblyAI Speech-to-Text
-      ↓
-Gemini Evaluates Answer
-      ↓
-Contextual Follow-Up
-      ↓
-Coding Challenge
-      ↓
-Gemini Code Evaluation
-      ↓
-Final AI Feedback
-      ↓
-Interview History
-      ↓
-Dashboard Statistics
-```
+    Resume Upload
+          ↓
+    PDF Text Extraction
+          ↓
+    Interview Setup
+    (Role + Difficulty)
+          ↓
+    Gemini Generates
+    Personalized Questions
+          ↓
+    User Answers
+          ↓
+    Voice / Text / Coding
+          ↓
+    AI Evaluation
+          ↓
+    Score + Feedback
+          ↓
+    Interview Result
+          ↓
+    Interview History
 
----
+## 📄 Resume Analysis Flow
 
-## 📁 Project Structure
+    User uploads PDF resume
+             ↓
+    Backend receives file
+             ↓
+    PDF text extraction
+             ↓
+    Extracted resume content
+             ↓
+    Resume stored in MongoDB
+             ↓
+    Resume information used
+    for personalized interviews
 
-```text
-AI-Powered Mock Interview Platform/
-│
-├── client/
-│   └── src/
-│       ├── components/
-│       │   ├── AudioPlayer/
-│       │   ├── VoiceRecorder/
-│       │   ├── ConversationalMic/
-│       │   ├── CodeEditor/
-│       │   ├── ScoreCard/
-│       │   └── InterviewCard/
-│       │
-│       ├── pages/
-│       │   ├── LoginPage/
-│       │   ├── HomePage/
-│       │   ├── InterviewSetupPage/
-│       │   ├── InterviewPage/
-│       │   ├── FeedbackPage/
-│       │   └── HistoryPage/
-│       │
-│       └── services/
-│           ├── api.js
-│           ├── interviewService.js
-│           └── historyService.js
-│
-├── server/
-│   └── src/
-│       ├── config/
-│       ├── constants/
-│       ├── controllers/
-│       ├── middleware/
-│       ├── models/
-│       ├── routes/
-│       ├── services/
-│       └── utils/
-│
-└── README.md
-```
+## 🎤 Voice Interview Flow
 
-## 🧠 AI Architecture
+    Interview Question
+            ↓
+       Murf AI
+            ↓
+       Audio Output
+            ↓
+       User Response
+            ↓
+       AssemblyAI
+            ↓
+     Speech-to-Text
+            ↓
+       Gemini AI
+            ↓
+      AI Evaluation
 
-Google Gemini acts as the central AI service.
+## 💻 Live Coding
 
-The backend provides different prompt templates for:
+The platform provides an interactive coding environment using Monaco Editor.
 
-* Interview question generation
-* Interview greeting
-* Contextual follow-up questions
-* Final performance feedback
-* Code evaluation
+Users can:
 
-Conversation history is provided to Gemini so follow-up questions can consider what the candidate actually said during the interview.
+- Read coding questions
+- Write code inside the browser
+- Modify and test their solutions
+- Practice technical coding interviews
+- Receive AI-based evaluation as part of the interview experience
 
-Gemini responses that contain JSON are cleaned and parsed before being used by the application.
+## 🤖 AI Interview Engine
 
----
+Google Gemini is used as the core AI engine.
 
-## 📄 Resume Processing
+The AI system supports:
 
-The resume workflow is:
+- Personalized interview question generation
+- Resume-aware questions
+- Technical interview questions
+- Difficulty-based questioning
+- Candidate answer evaluation
+- Performance feedback
+- Interview scoring
 
-```text
-PDF Upload
-    ↓
-Multer
-    ↓
-PDF.js
-    ↓
-Text Extraction
-    ↓
-MongoDB
-    ↓
-Gemini
-    ↓
-Personalized Interview Questions
-```
+## 🔐 Authentication
 
-Each user has a resume record containing the uploaded filename and extracted resume text.
+The backend provides authentication for users.
 
-Re-uploading a resume updates the existing resume record for that user.
+Authentication includes:
 
----
+- User registration
+- User login
+- Password protection
+- JWT-based authentication
+- Protected API routes
+- Authenticated interview history
 
-## 🎙️ Voice Interview Architecture
+## 🗄️ Database
 
-### Candidate Answer
+MongoDB is used for persistent application data.
 
-```text
-Microphone
-    ↓
-MediaRecorder API
-    ↓
-Audio Blob
-    ↓
-Backend
-    ↓
-AssemblyAI
-    ↓
-Transcribed Text
-    ↓
-Gemini
-    ↓
-Follow-Up Question
-```
+The database stores information such as:
 
-### AI Interviewer
+- User accounts
+- Resume information
+- Interview sessions
+- Interview answers
+- Scores
+- Feedback
+- Interview history
 
-```text
-Gemini
-   ↓
-Generated Question
-   ↓
-Murf AI
-   ↓
-Audio
-   ↓
-AudioPlayer
-   ↓
-Candidate
-```
+## ⚙️ Environment Variables
 
-The interview page manages four main states:
+### Client
 
-```text
-Speaking → Listening → Thinking → Speaking
-```
+Create a `.env` file inside the `client` directory.
 
-The flow continues until the interview is completed.
+    VITE_API_URL=your_backend_api_url
 
----
+### Server
 
-## 💻 Coding Interview Flow
+Create a `.env` file inside the `server` directory.
 
-Coding questions are presented using the Monaco Editor.
+    PORT=5000
+    MONGODB_URI=your_mongodb_connection_string
+    JWT_SECRET=your_jwt_secret
+    CLIENT_URL=your_frontend_url
+    GEMINI_API_KEY=your_gemini_api_key
+    ASSEMBLYAI_API_KEY=your_assemblyai_api_key
+    MURF_API_KEY=your_murf_api_key
 
-```text
-Coding Question
-      ↓
-Monaco Editor
-      ↓
-Candidate Code
-      ↓
-Backend
-      ↓
-Gemini Code Evaluation
-      ↓
-Evaluation Stored
-      ↓
-Next Question / Final Feedback
-```
+Do not commit `.env` files or API keys to GitHub.
 
----
+## 💻 Local Setup
 
-## 📊 Feedback & History
+### 1. Clone the repository
 
-When an interview ends, Gemini generates the final feedback.
+    git clone https://github.com/manikanta-2310/ai-powered-mock-interview-platform.git
 
-The feedback is stored with the interview so that it can be retrieved later without unnecessarily generating the same feedback again.
+    cd ai-powered-mock-interview-platform
 
-The history system supports:
+### 2. Install frontend dependencies
 
-* Pagination
-* Individual interview retrieval
-* Individual deletion
-* Clearing all history
+    cd client
+    npm install
 
----
+### 3. Install backend dependencies
 
-## 🔐 Environment Variables
+    cd ../server
+    npm install
 
-Create a `.env` file inside the `server` directory:
+### 4. Configure environment variables
 
-```env
-MONGODB_URI=your_mongodb_connection_string
-JWT_SECRET=your_jwt_secret_key
-GEMINI_API_KEY=your_gemini_api_key
-ASSEMBLYAI_API_KEY=your_assemblyai_api_key
-MURF_API_KEY=your_murf_api_key
-```
+Add the required environment variables to the `.env` files in the client and server directories.
 
-**Never commit your `.env` file or API keys to GitHub.**
+### 5. Start the backend
 
----
+    cd server
+    npm run dev
 
-## ⚙️ Installation
-
-### Prerequisites
-
-* VS Code
-* Node.js
-* MongoDB Atlas account
-* Google Gemini API key
-* AssemblyAI API key
-* Murf AI API key
-
-### Backend
-
-```bash
-cd server
-npm install
-```
-
-### Frontend
+### 6. Start the frontend
 
 Open another terminal:
 
-```bash
-cd client
-npm install
-```
+    cd client
+    npm run dev
 
-### Run the Application
+The frontend will normally run on:
 
-Start the backend and frontend using the project's configured development commands.
+    http://localhost:5173
 
----
+The backend will normally run on:
 
-## 🔌 API Structure
+    http://localhost:5000
 
-The backend exposes API routes for:
+## 📡 Backend API
 
-```text
-/api/auth/...
-/api/resume/...
-/api/interview/...
-/api/history/...
-```
+The backend API is organized under the `/api` prefix.
 
-### Resume
+    /api/auth
+    /api/interview
+    /api/resume
+    /api/history
 
-```text
-POST /api/resume/upload
-GET  /api/resume
-```
+The API handles authentication, interviews, resume processing, interview history, and related business logic.
 
-### Interview
+## ☁️ Deployment
 
-```text
-POST /api/interview/start
-POST /api/interview/:id/answer
-POST /api/interview/:id/voice-answer
-POST /api/interview/:id/code
-POST /api/interview/:id/end
-GET  /api/interview/:id
-POST /api/interview/transcribe
-POST /api/interview/speak
-```
+The application is deployed using Vercel.
 
-### History
+### Frontend
 
-```text
-GET    /api/history
-GET    /api/history/:id
-DELETE /api/history/:id
-DELETE /api/history/clear
-```
+The React/Vite application is deployed separately with the `client` directory configured as the root directory.
 
----
+### Backend
 
-## 🏆 Core Functionalities
+The Express API is deployed separately with the `server` directory configured for the backend deployment.
 
-The project was developed around three major functionalities:
+Environment variables are configured through Vercel rather than being committed to the repository.
 
-### 1. Resume Upload & Interview Setup
+## 🧪 Build
 
-* Gemini AI configuration
-* Prompt templates
-* Resume model
-* PDF parsing
-* Resume upload
-* Interview model
-* Interview creation
-* Role and difficulty selection
+To create a production build of the frontend:
 
-### 2. AI Interview
+    cd client
+    npm run build
 
-* AssemblyAI speech-to-text
-* Murf AI text-to-speech
-* Voice recording
-* AI follow-up questions
-* Live coding
-* Code evaluation
-* Interview state management
+To preview the production build locally:
 
-### 3. Feedback & Interview History
+    npm run preview
 
-* AI-generated feedback
-* Five-category scoring
-* Interview history
-* Pagination
-* Dashboard statistics
-* Feedback visualization
+## 📊 Main User Journey
 
----
+    Register / Login
+           ↓
+       Dashboard
+           ↓
+    Upload Resume
+           ↓
+    Select Interview
+    Role + Difficulty
+           ↓
+    Start Interview
+           ↓
+    AI Questions
+           ↓
+    Answer Questions
+           ↓
+    Coding / Voice / Text
+           ↓
+    AI Evaluation
+           ↓
+    Score & Feedback
+           ↓
+    View History
+
+## 🎯 Project Objective
+
+The goal of this project is to simulate a realistic technical interview environment using AI.
+
+Instead of practicing generic interview questions, the platform combines:
+
+- Candidate resume information
+- Job/interview role
+- Difficulty level
+- AI-generated questions
+- Voice interaction
+- Coding practice
+- Automated evaluation
+- Personalized feedback
+
+This creates a more interactive and personalized interview preparation experience.
 
 ## 🔮 Future Improvements
 
-Potential future improvements include:
+- Real-time AI conversational interviews
+- More programming languages for live coding
+- Automated code execution and test cases
+- Advanced resume-job description matching
+- Detailed skill-wise performance analytics
+- Adaptive interview difficulty
+- Interview recommendations based on previous performance
+- More AI voice providers
+- Real-time interview transcription
+- Advanced recruiter/admin dashboard
 
-* More adaptive interview questioning
-* Additional interview roles
-* More coding languages
-* Improved coding evaluation
-* More detailed performance analytics
-* Additional AI interviewer personalities
-* Progress tracking across multiple interviews
+## 👨‍💻 Author
 
----
+Manikanta
 
-## 📌 Project Goal
+GitHub: https://github.com/manikanta-2310
 
-The goal of this project is to make interview preparation more realistic by moving beyond passive preparation and giving candidates an opportunity to **practice speaking, coding, responding under pressure, and receiving immediate AI-driven feedback**.
+## 📜 License
 
-> **Knowing the answer is not enough. The goal is to practice performing the answer.**
+This project is developed for educational and portfolio purposes.
