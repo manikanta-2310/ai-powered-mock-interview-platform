@@ -1,15 +1,15 @@
-import { PDFParse } from 'pdf-parse';
+import { extractText, getDocumentProxy } from 'unpdf';
 import Resume from '../models/Resume.model.js';
 
 export const parseResumePDF = async (pdfBuffer) => {
   try {
-    const parser = new PDFParse({ data: pdfBuffer });
+    const pdf = await getDocumentProxy(new Uint8Array(pdfBuffer));
 
-    const result = await parser.getText();
+    const { text } = await extractText(pdf, {
+      mergePages: true,
+    });
 
-    await parser.destroy();
-
-    const extractedText = result.text?.trim();
+    const extractedText = text?.trim();
 
     if (!extractedText) {
       throw new Error('No text could be extracted from the PDF');
